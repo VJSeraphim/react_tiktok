@@ -4,6 +4,7 @@ import { FaCloudUploadAlt } from 'react-icons/fa'
 import { MdDelete } from 'react-icons/md'
 import axios from 'axios'
 import { SanityAssetDocument } from '@sanity/client'
+import { BASE_URL } from '../utils'
 
 import useAuthStore from '../store/authStore'
 import { client } from '../utils/client'
@@ -17,6 +18,7 @@ const Upload = () => {
     const [caption, setCaption] = useState('')
     const [category, setCategory] = useState(topics[0].name)
     const [savingPost, setSavingPost] = useState(false)
+    const router = useRouter()
 
     const { userProfile }: { userProfile: any } = useAuthStore() 
 
@@ -56,8 +58,12 @@ const Upload = () => {
                 postedBy: {
                     _type: 'postedBy',
                     _ref: userProfile?._id
-                }
+                },
+                topic: category
             }
+
+            await axios.post(`${BASE_URL}/api/posts`, document)
+            router.push('/')
         }
     }
 
