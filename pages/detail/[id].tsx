@@ -10,6 +10,9 @@ import axios from 'axios'
 
 import { BASE_URL } from '../../utils'
 import { Video } from '../../types'
+import useAuthStore from '../../store/authStore'
+import Comments from '../../components/Comments'
+import LikeButton from '../../components/LikeButton'
 
 interface IProps {
   postDetails: Video, 
@@ -21,6 +24,7 @@ const Detail = ({ postDetails }: IProps) => {
   const [isVideoMuted, setIsVideoMuted] = useState(false)
   const videoRef = useRef<HTMLVideoElement>(null)
   const router = useRouter()
+  const { userProfile } = useAuthStore()
 
   if(!post) return null
 
@@ -106,7 +110,7 @@ const Detail = ({ postDetails }: IProps) => {
             </div>
             <div>
               <Link href="/">
-                <div className="flex items-center gap-2">
+                <div className="flex mt-3 gap-2">
                   <p className="flex gap-2 item-center md:text-md font-bold text-primary">
                     {post.postedBy.userName}
                     {``}
@@ -118,7 +122,18 @@ const Detail = ({ postDetails }: IProps) => {
                 </div>
               </Link>
             </div>
-          </div>          
+          </div>
+          <p className="px-10 text-lg text-gray-600">
+            {post.caption}  
+          </p>
+          <div className="mt-10 px-10">
+            {userProfile && (
+              <LikeButton />
+            )}
+          </div>
+          <Comments 
+          
+          />          
         </div>
       </div>
     </div>
