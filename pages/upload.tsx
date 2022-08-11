@@ -62,7 +62,7 @@ const Upload = () => {
                 topic: category
             }
 
-            await axios.post(`${BASE_URL}/api/posts`, document)
+            await axios.post(`${BASE_URL}/api/post`, document)
             router.push('/')
         }
     }
@@ -99,7 +99,7 @@ const Upload = () => {
                                             src={videoAsset?.url}
                                             loop
                                             controls
-                                            className="rounded-xl h-[45px] mt-16 bg-black"
+                                            className="rounded-xl h-[450px] mt-16 bg-black"
                                         >
                                         </video>
                                     </div>

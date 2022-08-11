@@ -8,7 +8,7 @@ export default async function handler(
     res: NextApiResponse
 ){
     if(req.method === 'POST') {
-        const { userId, postId, like} = req.body
+        const { userId, postId, like } = req.body
         const data = like ? 
             await client
             .patch(postId)
